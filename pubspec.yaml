@@ -29,6 +29,29 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
+
+# ---------------------------------------------------------------------------
+# Iconos de la app. Regenerar las fuentes con `python3 tool/generate_icon.py`
+# y luego los recursos de plataforma con `dart run flutter_launcher_icons`.
+# ---------------------------------------------------------------------------
+flutter_launcher_icons:
+  # Icono base (Android legacy + iOS). PNG cuadrado de 1024x1024.
+  image_path: "assets/icon/app_icon.png"
+
+  android: true
+  ios: true
+
+  # Android: icono adaptativo (Android 8+). Fondo = verde de marca;
+  # primer plano = círculo + € con margen para la "safe zone".
+  adaptive_icon_background: "#00C896"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  min_sdk_android: 21
+
+  # iOS no admite canal alfa en el icono: se aplana contra el verde de
+  # marca (iOS ya redondea las esquinas por su cuenta).
+  remove_alpha_ios: true
+  background_color_ios: "#00C896"
