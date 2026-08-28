@@ -1,0 +1,34 @@
+name: nomina_facil
+description: "Calculadora de nómina y sueldo neto para España. Moderna, 100% offline."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Compras in-app / suscripción PRO (RevenueCat)
+  purchases_flutter: ^8.0.0
+  # Compartir resultados (frases para redes / WhatsApp)
+  share_plus: ^10.0.0
+  # Tipografía moderna
+  google_fonts: ^6.0.0
+  # Gestión de estado sencilla
+  provider: ^6.1.0
+  # Iconografía / ilustraciones vectoriales
+  flutter_svg: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
