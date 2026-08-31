@@ -93,6 +93,24 @@ void main() {
     expect(d.porcentajeQueTeQuedas, greaterThan(0));
   });
 
+  test('16 pagas: el neto anual no cambia, el mensual sí', () {
+    final r14 = calc.calcularNeto(
+      bruto: 30000,
+      ccaa: 'madrid',
+      pagas: 14,
+      numHijos: 0,
+    );
+    final r16 = calc.calcularNeto(
+      bruto: 30000,
+      ccaa: 'madrid',
+      pagas: 16,
+      numHijos: 0,
+    );
+    // El neto anual solo depende del bruto, no del número de pagas.
+    expect(r16.netoAnual, closeTo(r14.netoAnual, 0.01));
+    expect(r16.netoMensual, closeTo(r16.netoAnual / 16, 0.01));
+  });
+
   test('régimen foral (País Vasco) también da neto coherente', () {
     final r = calc.calcularNeto(
       bruto: 40000,

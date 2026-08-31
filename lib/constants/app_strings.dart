@@ -22,6 +22,7 @@ class AppStrings {
   static const String hijos = 'Hijos a cargo';
   static const String pagas12 = '12 pagas';
   static const String pagas14 = '14 pagas';
+  static const String pagas16 = '16 pagas';
 
   // --- Home ----------------------------------------------------------
 

@@ -28,7 +28,7 @@ class AppConstants {
 
   // --- Opciones de pagas --------------------------------------------------
 
-  static const List<int> opcionesPagas = [12, 14];
+  static const List<int> opcionesPagas = [12, 14, 16];
   static const int pagasPorDefecto = 14;
 
   // --- Hijos -----------------------------------------------------------

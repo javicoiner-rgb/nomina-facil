@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
 import '../constants/app_strings.dart';
 
-/// Toggle 12 / 14 pagas, reutilizado por varios modos.
+/// Toggle 12 / 14 / 16 pagas, reutilizado por varios modos.
 class SelectorPagasWidget extends StatelessWidget {
   final int pagas;
   final ValueChanged<int> onChanged;
@@ -31,6 +31,7 @@ class SelectorPagasWidget extends StatelessWidget {
           segments: const [
             ButtonSegment(value: 12, label: Text(AppStrings.pagas12)),
             ButtonSegment(value: 14, label: Text(AppStrings.pagas14)),
+            ButtonSegment(value: 16, label: Text(AppStrings.pagas16)),
           ],
           selected: {pagas},
           onSelectionChanged: (s) => onChanged(s.first),
