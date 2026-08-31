@@ -2,7 +2,7 @@ name: nomina_facil
 description: "Calculadora de nómina y sueldo neto para España. Moderna, 100% offline."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ^3.13.2
