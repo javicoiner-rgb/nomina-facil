@@ -191,24 +191,42 @@ País Vasco y para dar contexto; para las comunidades de régimen común el
 resultado es el mismo (la diferencia se ve en la declaración de la renta).
 
 Cada comunidad publica su escala en su Ley de Medidas Fiscales o de
-Presupuestos. Las escalas incluidas (`comunidades` en `tax_data_2026.dart`):
+Presupuestos. Las escalas incluidas (`comunidades` en `tax_data_2026.dart`,
+orden alfabético con las forales al final):
 
 | CCAA | Régimen | Notas |
 |------|---------|-------|
-| Madrid | Común | Escala deflactada; tipos reducidos. |
-| Cataluña | Común | Tramo bajo al 10,50 %; tramos altos hasta 25,50 %. |
 | Andalucía | Común | Escala deflactada 2023, alineada con la estatal. |
-| C. Valenciana | Común | Escala ampliada a 10 tramos; primer tipo 9 %. |
-| País Vasco | **Foral** | Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
-| Galicia | Común | Rebaja en los primeros tramos. |
 | Aragón | Común | Escala de 9 tramos. |
-| Castilla y León | Común | 5 tramos; primer tipo 9 %. |
-| Murcia | Común | Rebajas progresivas 2023-2024. |
+| Asturias | Común | ⚠️ **Pendiente de verificar contra el BOPA.** Placeholder: usa `tramosEstatales`. |
+| Baleares | Común | ⚠️ **Pendiente de verificar contra el BOIB.** Placeholder: usa `tramosEstatales`. |
 | Canarias | Común | 6 tramos; primer tipo 9 %. |
+| Cantabria | Común | ⚠️ **Pendiente de verificar contra el BOC.** Placeholder: usa `tramosEstatales`. |
+| Castilla-La Mancha | Común | ⚠️ **Pendiente de verificar contra el DOCM.** Placeholder: usa `tramosEstatales`. |
+| Castilla y León | Común | 5 tramos; primer tipo 9 %. |
+| Cataluña | Común | Tramo bajo al 10,50 %; tramos altos hasta 25,50 %. |
+| C. Valenciana | Común | Escala ampliada a 10 tramos; primer tipo 9 %. |
+| Extremadura | Común | ⚠️ **Pendiente de verificar contra el DOE.** Placeholder: usa `tramosEstatales`. |
+| Galicia | Común | Rebaja en los primeros tramos. |
+| Madrid | Común | Escala deflactada; tipos reducidos. |
+| Murcia | Común | Rebajas progresivas 2023-2024. |
+| La Rioja | Común | ⚠️ **Pendiente de verificar contra el BOR.** Placeholder: usa `tramosEstatales`. |
+| Navarra | **Foral** | ⚠️ **Pendiente de verificar contra el BOE/BON navarro.** Placeholder: usa la misma escala foral que el País Vasco como aproximación provisional. |
+| País Vasco | **Foral** | Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
 
-**Comunidades no incluidas** (usan la escala estatal duplicada por defecto si
-se añaden): Asturias, Cantabria, Castilla-La Mancha, Extremadura, Baleares,
-La Rioja, Navarra (foral), Ceuta y Melilla (con bonificación del 60 %).
+**Comunidades aún no incluidas:** Ceuta y Melilla (con bonificación del 60 %,
+no son CCAA en sentido estricto).
+
+**⚠️ Pendiente de verificación contra el BOE/boletín autonómico** (7
+comunidades añadidas sin escala propia confirmada, usan `tramosEstatales`
+como placeholder marcado con el comentario `// Escala pendiente de
+confirmar contra BOE autonómico` en el código): Asturias, Cantabria,
+Castilla-La Mancha, Extremadura, Baleares, La Rioja y Navarra (esta última,
+además, usa la escala foral del País Vasco como aproximación en vez de la
+escala estatal, al ser régimen foral). Como la retención en nómina no
+depende de la escala autonómica en régimen común (ver punto 1), este
+placeholder no afecta al resultado mostrado en la app salvo en el caso de
+Navarra.
 
 **Fuentes por comunidad:** texto refundido de disposiciones legales de cada
 CCAA en materia de tributos cedidos; leyes autonómicas de medidas fiscales
