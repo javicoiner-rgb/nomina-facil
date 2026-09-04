@@ -27,11 +27,16 @@ class PurchaseService extends ChangeNotifier {
   /// `true` cuando ya se ha intentado configurar el SDK.
   bool get inicializado => _inicializado;
 
-  /// Oferta actual (el primer paquete disponible), o `null`.
-  Package? get paquetePro =>
-      _offerings?.current?.availablePackages.isNotEmpty == true
-          ? _offerings!.current!.availablePackages.first
-          : null;
+  /// Paquete de la oferta actual cuyo producto es [AppConstants.productIdPro],
+  /// o el primer paquete disponible si no se encuentra ese identificador.
+  Package? get paquetePro {
+    final paquetes = _offerings?.current?.availablePackages;
+    if (paquetes == null || paquetes.isEmpty) return null;
+    return paquetes.firstWhere(
+      (p) => p.storeProduct.identifier == AppConstants.productIdPro,
+      orElse: () => paquetes.first,
+    );
+  }
 
   /// Precio ya formateado del paquete PRO (p. ej. "2,99 €"), o `null`.
   String? get precioPro => paquetePro?.storeProduct.priceString;

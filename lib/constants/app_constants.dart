@@ -44,10 +44,13 @@ class AppConstants {
   // --- RevenueCat -----------------------------------------------------
 
   /// Identificador del "entitlement" PRO en RevenueCat.
-  static const String entitlementPro = 'pro';
+  static const String entitlementPro = 'NóminaFácil Pro';
+
+  /// Identificador del producto PRO en Google Play.
+  static const String productIdPro = 'nominafacil_pro';
 
   /// Clave pública de API de RevenueCat (rellenar en despliegue real).
-  static const String revenueCatApiKeyAndroid = 'goog_TU_CLAVE_AQUI';
+  static const String revenueCatApiKeyAndroid = 'test_sOcUmkiWHVZEWeAerNuegaVbmNb';
   static const String revenueCatApiKeyIos = 'appl_TU_CLAVE_AQUI';
 
   // --- Rutas nombradas ------------------------------------------------
