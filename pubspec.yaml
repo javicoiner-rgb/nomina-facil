@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # Compras in-app / suscripción PRO (RevenueCat)
-  purchases_flutter: ^8.0.0
+  purchases_flutter: ^10.11.0
   # Compartir resultados (frases para redes / WhatsApp)
   share_plus: ^10.0.0
   # Tipografía moderna

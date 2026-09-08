@@ -108,8 +108,9 @@ class PurchaseService extends ChangeNotifier {
     _cargando = true;
     notifyListeners();
     try {
-      final info = await Purchases.purchasePackage(paquete);
-      _actualizarDesde(info);
+      final resultado =
+          await Purchases.purchase(PurchaseParams.package(paquete));
+      _actualizarDesde(resultado.customerInfo);
     } on PlatformException catch (e) {
       final code = PurchasesErrorHelper.getErrorCode(e);
       if (code != PurchasesErrorCode.purchaseCancelledError) {
