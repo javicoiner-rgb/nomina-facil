@@ -66,8 +66,14 @@ class PurchaseService extends ChangeNotifier {
 
       await _refrescarEstado();
       await _cargarOfertas();
+    } on PlatformException catch (e) {
+      // P.ej. clave de API de test/inválida en un build de release:
+      // RevenueCat no queda configurado y la app sigue en modo gratuito.
+      debugPrint('PurchaseService.init: RevenueCat no disponible ($e)');
+      _isPro = false;
     } catch (e) {
       debugPrint('PurchaseService.init error: $e');
+      _isPro = false;
     }
   }
 
