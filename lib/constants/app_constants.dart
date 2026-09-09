@@ -50,7 +50,7 @@ class AppConstants {
   static const String productIdPro = 'nominafacil_pro';
 
   /// Clave pública de API de RevenueCat (rellenar en despliegue real).
-  static const String revenueCatApiKeyAndroid = 'test_sOcUmkiWHVZEWeAerNuegaVbmNb';
+  static const String revenueCatApiKeyAndroid = 'goog_opBRlAcmBMFsvHlAjnCPdkSAQTz';
   static const String revenueCatApiKeyIos = 'appl_TU_CLAVE_AQUI';
 
   // --- Rutas nombradas ------------------------------------------------
