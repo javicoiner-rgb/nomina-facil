@@ -172,7 +172,7 @@ class TaxData2026 {
           'regulariza en la declaración de la renta.',
       tramosAutonomicos: [
         TramoIRPF(13000, 0.0950),
-        TramoIRPF(21000, 0.1200),
+        TramoIRPF(21100, 0.1200),
         TramoIRPF(35200, 0.1500),
         TramoIRPF(60000, 0.1850),
         TramoIRPF(double.infinity, 0.2250),
@@ -186,14 +186,14 @@ class TaxData2026 {
           'igual en todo el régimen común. La diferencia autonómica se '
           'regulariza en la declaración de la renta.',
       tramosAutonomicos: [
-        TramoIRPF(13972.50, 0.0950),
-        TramoIRPF(21209.10, 0.1200),
+        TramoIRPF(13072.50, 0.0950),
+        TramoIRPF(21210.00, 0.1200),
         TramoIRPF(36960.00, 0.1500),
-        TramoIRPF(52360.00, 0.1850),
-        TramoIRPF(61100.00, 0.2050),
-        TramoIRPF(82360.00, 0.2300),
-        TramoIRPF(102360.00, 0.2400),
-        TramoIRPF(122360.00, 0.2450),
+        TramoIRPF(52500.00, 0.1850),
+        TramoIRPF(60000.00, 0.2050),
+        TramoIRPF(80000.00, 0.2300),
+        TramoIRPF(90000.00, 0.2400),
+        TramoIRPF(130000.00, 0.2500),
         TramoIRPF(double.infinity, 0.2550),
       ],
     ),
@@ -201,23 +201,38 @@ class TaxData2026 {
       id: 'asturias',
       nombre: 'Asturias',
       descripcion:
-          'Escala autonómica pendiente de confirmar contra el BOPA. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(12450, 0.0900),
+        TramoIRPF(17707.20, 0.1200),
+        TramoIRPF(33007.20, 0.1400),
+        TramoIRPF(53407.20, 0.1920),
+        TramoIRPF(70000, 0.2150),
+        TramoIRPF(90000, 0.2250),
+        TramoIRPF(175000, 0.2500),
+        TramoIRPF(double.infinity, 0.2600),
+      ],
     ),
     CCAA(
       id: 'baleares',
       nombre: 'Baleares',
       descripcion:
-          'Escala autonómica pendiente de confirmar contra el BOIB. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(10000, 0.0900),
+        TramoIRPF(18000, 0.1125),
+        TramoIRPF(30000, 0.1425),
+        TramoIRPF(48000, 0.1750),
+        TramoIRPF(70000, 0.1900),
+        TramoIRPF(90000, 0.2175),
+        TramoIRPF(120000, 0.2275),
+        TramoIRPF(175000, 0.2375),
+        TramoIRPF(double.infinity, 0.2475),
+      ],
     ),
     CCAA(
       id: 'canarias',
@@ -227,35 +242,45 @@ class TaxData2026 {
           'igual en todo el régimen común. La diferencia autonómica se '
           'regulariza en la declaración de la renta.',
       tramosAutonomicos: [
-        TramoIRPF(12450, 0.0900),
-        TramoIRPF(17707.20, 0.1150),
-        TramoIRPF(33007.20, 0.1400),
-        TramoIRPF(53407.20, 0.1850),
-        TramoIRPF(90000, 0.2350),
-        TramoIRPF(double.infinity, 0.2400),
+        TramoIRPF(13748, 0.0900),
+        TramoIRPF(19422, 0.1150),
+        TramoIRPF(35924, 0.1400),
+        TramoIRPF(57566, 0.1850),
+        TramoIRPF(93268, 0.2350),
+        TramoIRPF(123745, 0.2500),
+        TramoIRPF(double.infinity, 0.2600),
       ],
     ),
     CCAA(
       id: 'cantabria',
       nombre: 'Cantabria',
       descripcion:
-          'Escala autonómica pendiente de confirmar contra el BOC. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(13000, 0.0850),
+        TramoIRPF(21000, 0.1100),
+        TramoIRPF(35200, 0.1450),
+        TramoIRPF(60000, 0.1800),
+        TramoIRPF(90000, 0.2250),
+        TramoIRPF(double.infinity, 0.2450),
+      ],
     ),
     CCAA(
       id: 'castilla_la_mancha',
       nombre: 'Castilla-La Mancha',
       descripcion:
-          'Escala autonómica pendiente de confirmar contra el DOCM. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(12450, 0.0950),
+        TramoIRPF(20200, 0.1200),
+        TramoIRPF(35200, 0.1500),
+        TramoIRPF(60000, 0.1850),
+        TramoIRPF(double.infinity, 0.2250),
+      ],
     ),
     CCAA(
       id: 'castilla_leon',
@@ -280,11 +305,10 @@ class TaxData2026 {
           'igual en todo el régimen común. La diferencia autonómica se '
           'regulariza en la declaración de la renta.',
       tramosAutonomicos: [
-        TramoIRPF(12450, 0.1050),
-        TramoIRPF(17707.20, 0.1200),
-        TramoIRPF(21000, 0.1400),
-        TramoIRPF(33007.20, 0.1500),
-        TramoIRPF(53407.20, 0.1880),
+        TramoIRPF(12500, 0.0950),
+        TramoIRPF(22000, 0.1250),
+        TramoIRPF(33000, 0.1600),
+        TramoIRPF(53000, 0.1900),
         TramoIRPF(90000, 0.2150),
         TramoIRPF(120000, 0.2350),
         TramoIRPF(175000, 0.2450),
@@ -297,17 +321,21 @@ class TaxData2026 {
       descripcion:
           'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
           'igual en todo el régimen común. La diferencia autonómica se '
-          'regulariza en la declaración de la renta.',
+          'regulariza en la declaración de la renta. Escala del ejercicio '
+          '2025; para 2026 la Generalitat aprobó una nueva rebaja '
+          '(Ley 5/2026, rango 8,80 %-29,35 %) cuyo desglose tramo a tramo '
+          'no se ha podido confirmar todavía (ver FISCAL_NOTES.md).',
       tramosAutonomicos: [
         TramoIRPF(12000, 0.0900),
         TramoIRPF(22000, 0.1200),
         TramoIRPF(32000, 0.1500),
         TramoIRPF(42000, 0.1750),
-        TramoIRPF(62000, 0.2000),
-        TramoIRPF(72000, 0.2250),
-        TramoIRPF(100000, 0.2500),
-        TramoIRPF(150000, 0.2650),
-        TramoIRPF(200000, 0.2750),
+        TramoIRPF(52000, 0.2000),
+        TramoIRPF(62000, 0.2250),
+        TramoIRPF(72000, 0.2500),
+        TramoIRPF(100000, 0.2650),
+        TramoIRPF(150000, 0.2750),
+        TramoIRPF(200000, 0.2850),
         TramoIRPF(double.infinity, 0.2950),
       ],
     ),
@@ -315,12 +343,20 @@ class TaxData2026 {
       id: 'extremadura',
       nombre: 'Extremadura',
       descripcion:
-          'Escala autonómica pendiente de confirmar contra el DOE. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(12450, 0.0800),
+        TramoIRPF(20200, 0.1000),
+        TramoIRPF(24200, 0.1600),
+        TramoIRPF(35200, 0.1750),
+        TramoIRPF(60000, 0.2100),
+        TramoIRPF(80200, 0.2350),
+        TramoIRPF(99200, 0.2400),
+        TramoIRPF(120200, 0.2450),
+        TramoIRPF(double.infinity, 0.2500),
+      ],
     ),
     CCAA(
       id: 'galicia',
@@ -330,12 +366,29 @@ class TaxData2026 {
           'igual en todo el régimen común. La diferencia autonómica se '
           'regulariza en la declaración de la renta.',
       tramosAutonomicos: [
-        TramoIRPF(12985, 0.0900),
-        TramoIRPF(21068, 0.1165),
+        TramoIRPF(12985.35, 0.0900),
+        TramoIRPF(21068.60, 0.1165),
         TramoIRPF(35200, 0.1490),
-        TramoIRPF(47600, 0.1840),
-        TramoIRPF(60000, 0.2050),
+        TramoIRPF(60000, 0.1840),
         TramoIRPF(double.infinity, 0.2250),
+      ],
+    ),
+    CCAA(
+      id: 'la_rioja',
+      nombre: 'La Rioja',
+      descripcion:
+          'La retención en nómina usa la escala estatal (art. 85 RIRPF), '
+          'igual en todo el régimen común. La diferencia autonómica se '
+          'regulariza en la declaración de la renta.',
+      tramosAutonomicos: [
+        TramoIRPF(12450, 0.0800),
+        TramoIRPF(20200, 0.1060),
+        TramoIRPF(35200, 0.1360),
+        TramoIRPF(40000, 0.1780),
+        TramoIRPF(50000, 0.1830),
+        TramoIRPF(60000, 0.1900),
+        TramoIRPF(120000, 0.2450),
+        TramoIRPF(double.infinity, 0.2700),
       ],
     ),
     CCAA(
@@ -367,17 +420,6 @@ class TaxData2026 {
         TramoIRPF(60000, 0.1790),
         TramoIRPF(double.infinity, 0.2250),
       ],
-    ),
-    CCAA(
-      id: 'la_rioja',
-      nombre: 'La Rioja',
-      descripcion:
-          'Escala autonómica pendiente de confirmar contra el BOR. Se usa '
-          'como aproximación la escala general estatal (art. 63.1.1º '
-          'LIRPF); la retención en nómina no cambia, ya que siempre usa la '
-          'escala de retención estatal (art. 85 RIRPF).',
-      // Escala pendiente de confirmar contra BOE autonómico
-      tramosAutonomicos: tramosEstatales,
     ),
     CCAA(
       id: 'navarra',

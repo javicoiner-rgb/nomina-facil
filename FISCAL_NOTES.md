@@ -4,35 +4,67 @@
 **Última actualización de datos:** 2026-09-13
 **Archivo de datos:** `lib/models/tax_data_2026.dart`
 
-> **Cambios v1.2 (2026-09-13) — intento de verificación de escalas autonómicas:**
-> Se intentó contrastar las 15 escalas autonómicas de régimen común contra
-> fuentes oficiales (BOE/boletines autonómicos) y fuentes fiscales
-> especializadas. Resultado:
-> - **Único cambio aplicado:** Aragón, tipo marginal máximo corregido de
->   25,00 % a **25,50 %** (confirmado por 3 fuentes independientes sin
->   contradicciones — ver §6).
-> - **Contrastado y confirmado sin cambios:** Madrid, Andalucía, Cataluña
->   (los umbrales y tipos ya presentes en el archivo coinciden con las
->   fuentes consultadas).
-> - **Cambio real detectado pero NO aplicado por falta de detalle fiable:**
->   Valencia (nueva escala 2026, 8,80 %–29,35 % según Garrigues, pero sin
->   desglose tramo a tramo) y Canarias (pasaría de 6 a 7 tramos, 9 %–26 %,
->   estructura exacta no confirmable). Se mantienen los valores anteriores
->   para no introducir una estructura de tramos no verificada.
-> - **No verificable con las fuentes disponibles:** Asturias, Baleares,
->   Cantabria, Castilla-La Mancha, Extremadura, La Rioja y Navarra. Las
->   fuentes web consultadas para estas comunidades se contradicen entre sí
->   (a veces dentro del mismo resultado de búsqueda: p. ej. para Asturias
->   una misma búsqueda devolvió simultáneamente "10 %–25,5 %", "9 %–26 %" y
->   una lista de tramos con valores distintos a ambas). Se han descartado
->   como fuente fiable y **se mantiene el placeholder** (`tramosEstatales`)
->   sin cambios; siguen pendientes de confirmar contra el boletín oficial
->   propio de cada comunidad (ver checklist §8).
+> **Cambios v1.3 (2026-09-13) — verificación de escalas autonómicas contra AEAT:**
+> Una primera pasada intentando verificar las escalas autonómicas contra
+> webs fiscales de terceros (guiafiscal.es, billeo.es, etc.) resultó en
+> datos contradictorios entre sí, así que se descartó ese método (ver
+> historial de v1.2 más abajo si se conserva en el control de versiones).
 >
-> **Importante:** no se afirma que las escalas autonómicas estén
-> "verificadas contra BOE/AEAT" en bloque — solo el cambio de Aragón tiene
-> esa garantía. El resto de comunidades de régimen común mantienen el
-> estado de confianza que ya tenían antes de esta revisión.
+> En su lugar se usó el **manual práctico de la Agencia Tributaria (AEAT),
+> ejercicio 2025** — que dedica una página por comunidad autónoma con la
+> escala oficial y su cuota íntegra acumulada tramo a tramo — como fuente
+> primaria. Cada tabla se validó recalculando la cuota íntegra acumulada de
+> cada tramo a partir del tipo y el umbral; **las 15 tablas de régimen
+> común cuadran al céntimo**, lo que da alta confianza en que no son
+> contenido generado/alucinado (a diferencia de las webs de v1.2). Aragón
+> se contrastó además de forma independiente en aragon.es (Gobierno de
+> Aragón), con resultado idéntico.
+>
+> **Resultado:**
+> - **Corregidas (tenían datos erróneos o desactualizados):**
+>   - **Aragón:** 1er umbral corregido de 13.972,50 € a 13.072,50 €
+>     (transposición de dígitos); tramos 5º-8º realineados (61.100→60.000,
+>     82.360→80.000, 102.360→90.000, 122.360→130.000) y el tipo del 8º
+>     tramo de 24,50 % a 25,00 %.
+>   - **Cataluña:** la tabla anterior (9 tramos, 10,50 % inicial,
+>     umbrales 17.707,20/21.000/33.007,20/53.407,20/175.000) correspondía a
+>     una escala **anterior** a la reforma de la Llei de mesures fiscals
+>     2025. La escala vigente tiene **8 tramos**, empieza al **9,50 %** y
+>     usa umbrales redondos propios (12.500/22.000/33.000/53.000/90.000/
+>     120.000/175.000), máximo 25,50 % sin cambios.
+>   - **Galicia:** se eliminó un tramo espurio (47.600 €, 18,40 %) que no
+>     existe en la escala oficial; la escala real tiene 5 tramos, no 6
+>     (12.985,35/21.068,60/35.200/60.000, tipos 9/11,65/14,9/18,4/22,5 %).
+>   - **Andalucía:** 2º umbral corregido de 21.000 € a 21.100 €.
+>   - **Canarias:** la tabla tenía solo 6 tramos y un máximo de 24 %,
+>     desactualizada. La escala vigente tiene **7 tramos**, máximo **26 %**
+>     (13.748/19.422/35.924/57.566/93.268/123.745).
+>   - **Valencia:** faltaba un tramo (52.000-62.000 €, 20 %); la escala
+>     real de 2025 tiene 11 tramos, no 10. **Aviso:** para 2026 la
+>     Generalitat aprobó una nueva rebaja (Ley 5/2026, confirmada por
+>     Garrigues: rango 8,80 %-29,35 %, antes 9,00 %-29,50 %) cuyo desglose
+>     tramo a tramo no está aún disponible en el manual AEAT (que en la
+>     fecha de esta revisión solo cubre el ejercicio 2025); se ha dejado la
+>     escala 2025 como mejor aproximación disponible, marcada en su
+>     `descripcion` en el código.
+> - **Confirmadas sin cambios:** Madrid, Murcia, Castilla y León (las
+>   tablas ya presentes coincidían exactamente con el manual AEAT).
+> - **Rellenadas por primera vez con datos reales** (antes usaban el
+>   placeholder de la escala estatal, `tramosEstatales`): **Asturias** (8
+>   tramos, 9 %-26 %), **Baleares** (9 tramos, 9 %-24,75 %), **Cantabria**
+>   (6 tramos, 8,5 %-24,5 %), **Castilla-La Mancha** (5 tramos, 9,5 %-22,5 %),
+>   **Extremadura** (9 tramos, 8 %-25 %), **La Rioja** (8 tramos, 8 %-27 %).
+> - **Sigue sin verificar:** Navarra (foral). No hay página equivalente en
+>   el manual de régimen común de la AEAT para los territorios forales; se
+>   mantiene la aproximación provisional con la escala foral del País
+>   Vasco. País Vasco no se ha tocado (tal como se pidió).
+>
+> **Limitación conocida:** el manual AEAT usado es el del ejercicio 2025
+> (el más reciente publicado en su totalidad; el de 2026 se publica el año
+> siguiente a su devengo). Para la mayoría de comunidades no hay indicios
+> de cambio para 2026; donde sí los hay (Valencia) se ha anotado
+> explícitamente. Si una comunidad cambió su escala a mitad de 2026, esta
+> tabla podría no reflejarlo todavía.
 
 > **Cambios v1.1 (2026-08-28):**
 > - Cotización del trabajador a la Seguridad Social: **6,50 %** (antes 6,35 %),
@@ -224,43 +256,43 @@ Cada comunidad publica su escala en su Ley de Medidas Fiscales o de
 Presupuestos. Las escalas incluidas (`comunidades` en `tax_data_2026.dart`,
 orden alfabético con las forales al final):
 
-| CCAA | Régimen | Notas |
-|------|---------|-------|
-| Andalucía | Común | Escala deflactada 2023, alineada con la estatal. Umbrales y tipos contrastados en 2026-09 (Ley 5/2021 de Tributos Cedidos de Andalucía, art. 23, mod. Decreto-ley 7/2022, BOJA): sin cambios. |
-| Aragón | Común | Escala de 9 tramos. Tipo marginal máximo corregido en 2026-09 de 25,00 % a **25,50 %** (Decreto Legislativo 1/2005, art. 110-1, mod. Ley 4/2024 de Medidas Fiscales, BOA); confirmado por 3 fuentes independientes. Resto de tramos sin cambios. |
-| Asturias | Común | ⚠️ **Pendiente de verificar contra el BOPA.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: una misma búsqueda dio tres respuestas distintas entre sí ("10 %–25,5 %", "9 %–26 %" y una lista de tramos diferente a ambas); se mantiene el placeholder por falta de fuente fiable. |
-| Baleares | Común | ⚠️ **Pendiente de verificar contra el BOIB.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes discrepan entre 9 % y 9,5 % de tipo mínimo (máximo 24,75 % en ambas); se mantiene el placeholder por falta de desglose fiable. |
-| Canarias | Común | 6 tramos; primer tipo 9 %. ⚠️ 2026-09: fuentes indican que la escala real 2026 pasó a **7 tramos, 9 %–26 %** (Ley 5/2024 + deflactación Ley 9/2025), pero no se encontró el desglose exacto por tramo con dos fuentes coincidentes, así que **no se ha modificado** para evitar inventar umbrales. Pendiente de confirmar contra el BOC. |
-| Cantabria | Común | ⚠️ **Pendiente de verificar contra el BOC.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes contradictorias (rango 8,5 %–24,5 % citado, sin desglose fiable), se mantiene el placeholder. |
-| Castilla-La Mancha | Común | ⚠️ **Pendiente de verificar contra el DOCM.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes citan 5 tramos, 9,5 %–22,5 %, sin desglose fiable; se mantiene el placeholder. |
-| Castilla y León | Común | 5 tramos; primer tipo 9 %. |
-| Cataluña | Común | Tramo bajo al 10,50 %; tramos altos hasta 25,50 %. Contrastado 2026-09 (Decret-llei 5/2025 y Decreto Legislativo 1/2024, DOGC): sin cambios; otras fuentes web daban umbrales distintos y no fiables (ver v1.2). |
-| C. Valenciana | Común | Escala ampliada a 10 tramos; primer tipo 9 %. ⚠️ 2026-09: Garrigues confirma una nueva escala 2026 (Ley 5/2026), rango 8,80 %–29,35 % (antes 9,00 %–29,50 %), pero sin desglose tramo a tramo disponible; **no se ha modificado** el archivo. Pendiente de confirmar contra el DOGV. |
-| Extremadura | Común | ⚠️ **Pendiente de verificar contra el DOE.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes contradictorias entre sí sobre los tipos exactos (7,75 %/9,75 % vs "8 %–22,5 %" en el mismo resultado); se mantiene el placeholder. |
-| Galicia | Común | Rebaja en los primeros tramos. |
-| Madrid | Común | Escala deflactada; tipos reducidos. Contrastado 2026-09 (Decreto Legislativo 1/2010, mod. Ley 13/2023, BOCM): confirmado sin cambios. |
-| Murcia | Común | Rebajas progresivas 2023-2024. Revisado 2026-09: fuentes confirman 5 tramos, 9,5 %–22,5 %, "sin cambios en la escala para 2026" (Ley 11/2023); coincide con el archivo. |
-| La Rioja | Común | ⚠️ **Pendiente de verificar contra el BOR.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes muy contradictorias (un resultado cita "8 %–27 %, 7 tramos", otro "9,5 %–22,5 %"); se mantiene el placeholder. |
-| Navarra | **Foral** | ⚠️ **Pendiente de verificar contra el BOE/BON navarro.** Placeholder: usa la misma escala foral que el País Vasco como aproximación provisional. No se encontraron fuentes fiables en la revisión de 2026-09. |
-| País Vasco | **Foral** | Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
+Estado de verificación (2026-09-13), fuente primaria: **manual práctico
+IRPF 2025 de la AEAT** (`sede.agenciatributaria.gob.es`, sección
+"gravamen autonómico"), con validación cruzada recalculando la cuota
+íntegra acumulada de cada tramo — las 15 tablas de régimen común cuadran
+al céntimo. Aragón, además, contrastado independientemente en
+`aragon.es` (resultado idéntico).
+
+| CCAA | Régimen | Tipo mín. | Tipo máx. | Estado |
+|------|---------|-----------|-----------|--------|
+| Andalucía | Común | 9,50 % | 22,50 % | ✅ Verificada AEAT; corregido 2º umbral 21.000→21.100 €. |
+| Aragón | Común | 9,50 % | 25,50 % | ✅ Verificada AEAT + aragon.es (doble fuente, idénticas); corregidos 5 de 9 umbrales y el tipo del 8º tramo. |
+| Asturias | Común | 9,00 % | 26,00 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Baleares | Común | 9,00 % | 24,75 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Canarias | Común | 9,00 % | 26,00 % | ✅ Verificada AEAT; pasa de 6 a 7 tramos (estaba desactualizada, máx. antiguo 24 %). |
+| Cantabria | Común | 8,50 % | 24,50 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Castilla-La Mancha | Común | 9,50 % | 22,50 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Castilla y León | Común | 9,00 % | 21,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
+| Cataluña | Común | 9,50 % | 25,50 % | ✅ Verificada AEAT — **tabla anterior obsoleta** (era una escala previa a la reforma 2025, con 9 tramos y 10,50 % inicial); ahora 8 tramos, 9,50 % inicial, umbrales redondos. |
+| C. Valenciana | Común | 9,00 % | 29,50 % | 🟡 Verificada AEAT para el ejercicio **2025** (11 tramos, se corrigió un tramo que faltaba); para 2026 hay una rebaja confirmada (Ley 5/2026, Garrigues: 8,80 %–29,35 %) sin desglose tramo a tramo disponible todavía — ver `descripcion` en el código. |
+| Extremadura | Común | 8,00 % | 25,00 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Galicia | Común | 9,00 % | 22,50 % | ✅ Verificada AEAT; eliminado un tramo espurio (47.600 €) que no existe en la escala real (son 5 tramos, no 6). |
+| Madrid | Común | 8,50 % | 20,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
+| Murcia | Común | 9,50 % | 22,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
+| La Rioja | Común | 8,00 % | 27,00 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
+| Navarra | **Foral** | — | — | ⚠️ Sin verificar. El manual de régimen común de la AEAT no cubre los territorios forales. Se mantiene la aproximación provisional con la escala foral del País Vasco. |
+| País Vasco | **Foral** | 23,00 % | 49,00 % | Sin tocar (no forma parte de esta revisión). Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
 
 **Comunidades aún no incluidas:** Ceuta y Melilla (con bonificación del 60 %,
 no son CCAA en sentido estricto).
 
-**⚠️ Pendiente de verificación contra el BOE/boletín autonómico** (7
-comunidades añadidas sin escala propia confirmada, usan `tramosEstatales`
-como placeholder marcado con el comentario `// Escala pendiente de
-confirmar contra BOE autonómico` en el código): Asturias, Cantabria,
-Castilla-La Mancha, Extremadura, Baleares, La Rioja y Navarra (esta última,
-además, usa la escala foral del País Vasco como aproximación en vez de la
-escala estatal, al ser régimen foral). Como la retención en nómina no
-depende de la escala autonómica en régimen común (ver punto 1), este
-placeholder no afecta al resultado mostrado en la app salvo en el caso de
-Navarra.
-
-**Fuentes por comunidad:** texto refundido de disposiciones legales de cada
-CCAA en materia de tributos cedidos; leyes autonómicas de medidas fiscales
-2023-2025; Haciendas Forales del País Vasco (Normas Forales del IRPF).
+**Fuente principal:** manual práctico IRPF 2025, Agencia Tributaria,
+`sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/`
+(una página por comunidad). Complementada con `aragon.es` (Aragón) y
+Garrigues (aviso de la rebaja 2026 en Valencia). Esta es la escala del
+ejercicio 2025 (el manual de 2026 se publica el año siguiente a su
+devengo); se usa como mejor aproximación disponible para 2026 salvo donde
+se ha documentado un cambio conocido (Valencia).
 
 ---
 
