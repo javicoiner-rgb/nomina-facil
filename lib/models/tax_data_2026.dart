@@ -194,7 +194,7 @@ class TaxData2026 {
         TramoIRPF(82360.00, 0.2300),
         TramoIRPF(102360.00, 0.2400),
         TramoIRPF(122360.00, 0.2450),
-        TramoIRPF(double.infinity, 0.2500),
+        TramoIRPF(double.infinity, 0.2550),
       ],
     ),
     CCAA(

@@ -1,8 +1,38 @@
 # Notas fiscales — Nómina Fácil
 
 **Ejercicio:** 2026
-**Última actualización de datos:** 2026-08-28
+**Última actualización de datos:** 2026-09-13
 **Archivo de datos:** `lib/models/tax_data_2026.dart`
+
+> **Cambios v1.2 (2026-09-13) — intento de verificación de escalas autonómicas:**
+> Se intentó contrastar las 15 escalas autonómicas de régimen común contra
+> fuentes oficiales (BOE/boletines autonómicos) y fuentes fiscales
+> especializadas. Resultado:
+> - **Único cambio aplicado:** Aragón, tipo marginal máximo corregido de
+>   25,00 % a **25,50 %** (confirmado por 3 fuentes independientes sin
+>   contradicciones — ver §6).
+> - **Contrastado y confirmado sin cambios:** Madrid, Andalucía, Cataluña
+>   (los umbrales y tipos ya presentes en el archivo coinciden con las
+>   fuentes consultadas).
+> - **Cambio real detectado pero NO aplicado por falta de detalle fiable:**
+>   Valencia (nueva escala 2026, 8,80 %–29,35 % según Garrigues, pero sin
+>   desglose tramo a tramo) y Canarias (pasaría de 6 a 7 tramos, 9 %–26 %,
+>   estructura exacta no confirmable). Se mantienen los valores anteriores
+>   para no introducir una estructura de tramos no verificada.
+> - **No verificable con las fuentes disponibles:** Asturias, Baleares,
+>   Cantabria, Castilla-La Mancha, Extremadura, La Rioja y Navarra. Las
+>   fuentes web consultadas para estas comunidades se contradicen entre sí
+>   (a veces dentro del mismo resultado de búsqueda: p. ej. para Asturias
+>   una misma búsqueda devolvió simultáneamente "10 %–25,5 %", "9 %–26 %" y
+>   una lista de tramos con valores distintos a ambas). Se han descartado
+>   como fuente fiable y **se mantiene el placeholder** (`tramosEstatales`)
+>   sin cambios; siguen pendientes de confirmar contra el boletín oficial
+>   propio de cada comunidad (ver checklist §8).
+>
+> **Importante:** no se afirma que las escalas autonómicas estén
+> "verificadas contra BOE/AEAT" en bloque — solo el cambio de Aragón tiene
+> esa garantía. El resto de comunidades de régimen común mantienen el
+> estado de confianza que ya tenían antes de esta revisión.
 
 > **Cambios v1.1 (2026-08-28):**
 > - Cotización del trabajador a la Seguridad Social: **6,50 %** (antes 6,35 %),
@@ -196,22 +226,22 @@ orden alfabético con las forales al final):
 
 | CCAA | Régimen | Notas |
 |------|---------|-------|
-| Andalucía | Común | Escala deflactada 2023, alineada con la estatal. |
-| Aragón | Común | Escala de 9 tramos. |
-| Asturias | Común | ⚠️ **Pendiente de verificar contra el BOPA.** Placeholder: usa `tramosEstatales`. |
-| Baleares | Común | ⚠️ **Pendiente de verificar contra el BOIB.** Placeholder: usa `tramosEstatales`. |
-| Canarias | Común | 6 tramos; primer tipo 9 %. |
-| Cantabria | Común | ⚠️ **Pendiente de verificar contra el BOC.** Placeholder: usa `tramosEstatales`. |
-| Castilla-La Mancha | Común | ⚠️ **Pendiente de verificar contra el DOCM.** Placeholder: usa `tramosEstatales`. |
+| Andalucía | Común | Escala deflactada 2023, alineada con la estatal. Umbrales y tipos contrastados en 2026-09 (Ley 5/2021 de Tributos Cedidos de Andalucía, art. 23, mod. Decreto-ley 7/2022, BOJA): sin cambios. |
+| Aragón | Común | Escala de 9 tramos. Tipo marginal máximo corregido en 2026-09 de 25,00 % a **25,50 %** (Decreto Legislativo 1/2005, art. 110-1, mod. Ley 4/2024 de Medidas Fiscales, BOA); confirmado por 3 fuentes independientes. Resto de tramos sin cambios. |
+| Asturias | Común | ⚠️ **Pendiente de verificar contra el BOPA.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: una misma búsqueda dio tres respuestas distintas entre sí ("10 %–25,5 %", "9 %–26 %" y una lista de tramos diferente a ambas); se mantiene el placeholder por falta de fuente fiable. |
+| Baleares | Común | ⚠️ **Pendiente de verificar contra el BOIB.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes discrepan entre 9 % y 9,5 % de tipo mínimo (máximo 24,75 % en ambas); se mantiene el placeholder por falta de desglose fiable. |
+| Canarias | Común | 6 tramos; primer tipo 9 %. ⚠️ 2026-09: fuentes indican que la escala real 2026 pasó a **7 tramos, 9 %–26 %** (Ley 5/2024 + deflactación Ley 9/2025), pero no se encontró el desglose exacto por tramo con dos fuentes coincidentes, así que **no se ha modificado** para evitar inventar umbrales. Pendiente de confirmar contra el BOC. |
+| Cantabria | Común | ⚠️ **Pendiente de verificar contra el BOC.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes contradictorias (rango 8,5 %–24,5 % citado, sin desglose fiable), se mantiene el placeholder. |
+| Castilla-La Mancha | Común | ⚠️ **Pendiente de verificar contra el DOCM.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes citan 5 tramos, 9,5 %–22,5 %, sin desglose fiable; se mantiene el placeholder. |
 | Castilla y León | Común | 5 tramos; primer tipo 9 %. |
-| Cataluña | Común | Tramo bajo al 10,50 %; tramos altos hasta 25,50 %. |
-| C. Valenciana | Común | Escala ampliada a 10 tramos; primer tipo 9 %. |
-| Extremadura | Común | ⚠️ **Pendiente de verificar contra el DOE.** Placeholder: usa `tramosEstatales`. |
+| Cataluña | Común | Tramo bajo al 10,50 %; tramos altos hasta 25,50 %. Contrastado 2026-09 (Decret-llei 5/2025 y Decreto Legislativo 1/2024, DOGC): sin cambios; otras fuentes web daban umbrales distintos y no fiables (ver v1.2). |
+| C. Valenciana | Común | Escala ampliada a 10 tramos; primer tipo 9 %. ⚠️ 2026-09: Garrigues confirma una nueva escala 2026 (Ley 5/2026), rango 8,80 %–29,35 % (antes 9,00 %–29,50 %), pero sin desglose tramo a tramo disponible; **no se ha modificado** el archivo. Pendiente de confirmar contra el DOGV. |
+| Extremadura | Común | ⚠️ **Pendiente de verificar contra el DOE.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes contradictorias entre sí sobre los tipos exactos (7,75 %/9,75 % vs "8 %–22,5 %" en el mismo resultado); se mantiene el placeholder. |
 | Galicia | Común | Rebaja en los primeros tramos. |
-| Madrid | Común | Escala deflactada; tipos reducidos. |
-| Murcia | Común | Rebajas progresivas 2023-2024. |
-| La Rioja | Común | ⚠️ **Pendiente de verificar contra el BOR.** Placeholder: usa `tramosEstatales`. |
-| Navarra | **Foral** | ⚠️ **Pendiente de verificar contra el BOE/BON navarro.** Placeholder: usa la misma escala foral que el País Vasco como aproximación provisional. |
+| Madrid | Común | Escala deflactada; tipos reducidos. Contrastado 2026-09 (Decreto Legislativo 1/2010, mod. Ley 13/2023, BOCM): confirmado sin cambios. |
+| Murcia | Común | Rebajas progresivas 2023-2024. Revisado 2026-09: fuentes confirman 5 tramos, 9,5 %–22,5 %, "sin cambios en la escala para 2026" (Ley 11/2023); coincide con el archivo. |
+| La Rioja | Común | ⚠️ **Pendiente de verificar contra el BOR.** Placeholder: usa `tramosEstatales`. Revisado 2026-09: fuentes muy contradictorias (un resultado cita "8 %–27 %, 7 tramos", otro "9,5 %–22,5 %"); se mantiene el placeholder. |
+| Navarra | **Foral** | ⚠️ **Pendiente de verificar contra el BOE/BON navarro.** Placeholder: usa la misma escala foral que el País Vasco como aproximación provisional. No se encontraron fuentes fiables en la revisión de 2026-09. |
 | País Vasco | **Foral** | Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
 
 **Comunidades aún no incluidas:** Ceuta y Melilla (con bonificación del 60 %,
