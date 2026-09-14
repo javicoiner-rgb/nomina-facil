@@ -426,21 +426,24 @@ class TaxData2026 {
       nombre: 'Navarra',
       esForal: true,
       descripcion:
-          'Régimen foral. Escala pendiente de confirmar contra el BOE '
-          'navarro: se usa como aproximación la misma escala foral que el '
-          'País Vasco, con el cálculo simplificado de deducción general '
-          'del trabajo.',
-      // Escala pendiente de confirmar contra BOE autonómico (aproximación
-      // provisional con la escala foral del País Vasco).
+          'Régimen foral: escala única propia (no se suma la escala '
+          'estatal). Tarifa general del Decreto Foral Legislativo 4/2008, '
+          'mod. Ley Foral 22/2023, vigente sin cambios en 2025 y 2026 (las '
+          'Leyes Forales 20/2024 y 17/2025 no modificaron la tarifa). '
+          'Cálculo simplificado con deducción general del trabajo (ver '
+          'FISCAL_NOTES.md).',
       tramosAutonomicos: [
-        TramoIRPF(17720, 0.2300),
-        TramoIRPF(35440, 0.2800),
-        TramoIRPF(53160, 0.3500),
-        TramoIRPF(70880, 0.4000),
-        TramoIRPF(97240, 0.4500),
-        TramoIRPF(132930, 0.4600),
-        TramoIRPF(177240, 0.4700),
-        TramoIRPF(double.infinity, 0.4900),
+        TramoIRPF(4458.00, 0.1300),
+        TramoIRPF(10030.00, 0.2200),
+        TramoIRPF(21175.00, 0.2500),
+        TramoIRPF(35663.00, 0.2800),
+        TramoIRPF(51266.00, 0.3650),
+        TramoIRPF(66869.00, 0.4150),
+        TramoIRPF(89159.00, 0.4400),
+        TramoIRPF(139310.00, 0.4700),
+        TramoIRPF(195034.00, 0.4900),
+        TramoIRPF(334344.00, 0.5050),
+        TramoIRPF(double.infinity, 0.5200),
       ],
     ),
     CCAA(

@@ -1,8 +1,48 @@
 # Notas fiscales — Nómina Fácil
 
 **Ejercicio:** 2026
-**Última actualización de datos:** 2026-09-13
+**Última actualización de datos:** 2026-09-14
 **Archivo de datos:** `lib/models/tax_data_2026.dart`
+
+> **Cambios v1.4 (2026-09-14) — escala foral real de Navarra:**
+> Navarra usaba como placeholder la misma escala foral que País Vasco
+> (aproximación provisional, ver v1.3). Se ha sustituido por su tarifa
+> general real, obtenida de `iberley.es/temas/escala-irpf-navarra-66355`
+> (mirror de la norma consolidada, Decreto Foral Legislativo 4/2008 mod.
+> Ley Foral 22/2023) y validada matemáticamente recalculando la cuota
+> íntegra acumulada de los 10 primeros tramos: **cuadra al céntimo en
+> todos ellos**.
+>
+> La tabla de Iberley está fechada para el ejercicio 2024, pero se
+> confirmó por una fuente independiente (búsqueda específica sobre el
+> tramo del 50,5 % introducido por la Ley Foral 22/2023) que **la Ley
+> Foral 20/2024 y la Ley Foral 17/2025 no modificaron la tarifa**, por lo
+> que la misma escala sigue vigente en 2025 y 2026. Esa misma búsqueda
+> reprodujo de forma independiente el primer umbral exacto (4.458 €) y el
+> umbral que abre el tramo del 52 % (334.344 €), coincidiendo con la tabla
+> de Iberley.
+>
+> **Aviso de fuentes contradictorias descartadas:** un resultado de
+> búsqueda agregada distinto (no verificable matemáticamente) daba una
+> tabla alternativa con umbrales y tipos distintos (4.292/8.584/15.634/
+> 24.704/33.984/52.600/70.000/90.000/180.000/300.000, sin el tramo del
+> 50,5 % pese a que el propio texto de ese resultado lo mencionaba) — se
+> descartó por autocontradictoria e inconsistente con la ley que ella
+> misma citaba.
+>
+> El intento de fetch directo de `hacienda.navarra.es` falló por un
+> error de certificado TLS (el certificado cubre `*.navarra.es` pero no el
+> subdominio `www.hacienda.navarra.es`); tras redirigir a
+> `www.navarra.es/es/hacienda` no se encontró la tabla ahí. El documento
+> oficial en `navarra.es` (texto refundido alojado como
+> `NR/rdonlyres/.../TRLFIRPFv36.html`) devolvió error 502 en dos intentos;
+> se usó Iberley como mirror secundario, validado matemáticamente como se
+> describe arriba.
+>
+> No se han tocado las deducciones forales (`deduccionForalTrabajo`,
+> `deduccionForalDescendientesAcumulada`), que siguen siendo una
+> aproximación compartida entre Navarra y País Vasco, ni la escala de
+> País Vasco.
 
 > **Cambios v1.3 (2026-09-13) — verificación de escalas autonómicas contra AEAT:**
 > Una primera pasada intentando verificar las escalas autonómicas contra
@@ -58,6 +98,7 @@
 >   el manual de régimen común de la AEAT para los territorios forales; se
 >   mantiene la aproximación provisional con la escala foral del País
 >   Vasco. País Vasco no se ha tocado (tal como se pidió).
+>   **Resuelto en v1.4** (ver arriba): Navarra ya tiene su tarifa real.
 >
 > **Limitación conocida:** el manual AEAT usado es el del ejercicio 2025
 > (el más reciente publicado en su totalidad; el de 2026 se publica el año
@@ -280,7 +321,7 @@ al céntimo. Aragón, además, contrastado independientemente en
 | Madrid | Común | 8,50 % | 20,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
 | Murcia | Común | 9,50 % | 22,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
 | La Rioja | Común | 8,00 % | 27,00 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
-| Navarra | **Foral** | — | — | ⚠️ Sin verificar. El manual de régimen común de la AEAT no cubre los territorios forales. Se mantiene la aproximación provisional con la escala foral del País Vasco. |
+| Navarra | **Foral** | 13,00 % | 52,00 % | ✅ Verificada (2026-09-14) vía Iberley (mirror del Decreto Foral Legislativo 4/2008, mod. Ley Foral 22/2023), validación matemática de cuotas acumuladas + confirmación independiente de umbrales clave. Tabla del ejercicio 2024, confirmada vigente sin cambios en 2025-2026 (LF 20/2024 y LF 17/2025 no tocaron la tarifa). 11 tramos reales, ya no usa la escala de País Vasco como aproximación. |
 | País Vasco | **Foral** | 23,00 % | 49,00 % | Sin tocar (no forma parte de esta revisión). Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
 
 **Comunidades aún no incluidas:** Ceuta y Melilla (con bonificación del 60 %,
