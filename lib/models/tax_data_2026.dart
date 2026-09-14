@@ -451,16 +451,20 @@ class TaxData2026 {
       nombre: 'País Vasco',
       esForal: true,
       descripcion:
-          'Régimen foral: escala única (no se suma la escala estatal). '
-          'Cálculo simplificado con deducción general del trabajo.',
+          'Régimen foral: escala única (no se suma la escala estatal), '
+          'uniforme en las tres Diputaciones (Álava, Bizkaia, Gipuzkoa). '
+          'Escala 2026 con deflactación adicional del 2 % (Bizkaia: NF '
+          '13/2013 mod. NF 7/2025; Álava: NF 33/2013 mod. NF 21/2025; '
+          'Gipuzkoa: NF 3/2014 mod. NF 6/2025). Cálculo simplificado con '
+          'deducción general del trabajo (ver FISCAL_NOTES.md).',
       tramosAutonomicos: [
-        TramoIRPF(17720, 0.2300),
-        TramoIRPF(35440, 0.2800),
-        TramoIRPF(53160, 0.3500),
-        TramoIRPF(70880, 0.4000),
-        TramoIRPF(97240, 0.4500),
-        TramoIRPF(132930, 0.4600),
-        TramoIRPF(177240, 0.4700),
+        TramoIRPF(18080, 0.2300),
+        TramoIRPF(36160, 0.2800),
+        TramoIRPF(54240, 0.3500),
+        TramoIRPF(77450, 0.4000),
+        TramoIRPF(107260, 0.4500),
+        TramoIRPF(142960, 0.4600),
+        TramoIRPF(208390, 0.4700),
         TramoIRPF(double.infinity, 0.4900),
       ],
     ),

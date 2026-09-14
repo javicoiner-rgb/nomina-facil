@@ -4,6 +4,49 @@
 **Última actualización de datos:** 2026-09-14
 **Archivo de datos:** `lib/models/tax_data_2026.dart`
 
+> **Cambios v1.5 (2026-09-14) — escala foral real de País Vasco (2026, con
+> deflactación):**
+> El archivo tenía una escala de País Vasco con los tipos correctos (23 %
+> a 49 %, 8 tramos) pero **umbrales incorrectos a partir del 4º tramo**
+> (70.880/97.240/132.930/177.240 €, valores que no coinciden con ninguna
+> tabla oficial real ni de 2024 ni de 2026 — parecen datos fabricados,
+> ya que 70.880 es exactamente 4×17.720 pero el resto de la progresión no
+> sigue ningún patrón real).
+>
+> Verificación:
+> 1. Las tres Haciendas Forales (Álava, Bizkaia, Gipuzkoa) confirman por
+>    fuentes independientes que la escala general (23/28/35/40/45/46/47/
+>    49 %, 8 tramos) es **idéntica en los tres territorios** y que para
+>    2026 aplican una **deflactación adicional del 2 %** (Álava: NF
+>    21/2025; Bizkaia: NF 7/2025 + Decreto Foral 134/2025; Gipuzkoa: NF
+>    6/2025).
+> 2. Se validó matemáticamente la tabla del ejercicio **2024** (fuente:
+>    Iberley, mirror de NF 33/2013 Álava / NF 13/2013 Bizkaia / NF 3/2014
+>    Gipuzkoa) recalculando la cuota íntegra acumulada de los 7 tramos
+>    finitos: cuadra al céntimo. Esa tabla 2024 confirmó que los 2 primeros
+>    umbrales del archivo (17.720 y 35.440 €) eran correctos, pero reveló
+>    que los umbrales 4º-7º debían ser 75.910/105.130/140.130/204.270 €
+>    (no los que había).
+> 3. Se buscó la tabla ya deflactada para **2026**: dos fuentes
+>    independientes confirmaron el 1er umbral (18.080 €, antes 17.720 €)
+>    y el umbral que abre el tramo del 49 % (208.390 €, antes 204.270 €).
+>    Con esos dos puntos ancla confirmados, se tomó la tabla completa de
+>    guiafiscal.es y se validó recalculando su cuota acumulada en las 8
+>    filas: cuadra con el margen de redondeo esperado (±0,4 €) en todas.
+> 4. El intento de fetch directo a la página oficial de prensa de
+>    `bizkaia.eus` (nota de Hacienda Foral anunciando la tabla 2026) falló
+>    por error de certificado TLS; no se pudo usar como confirmación
+>    primaria directa, solo como referencia de que la norma y la fecha de
+>    aprobación (Decreto Foral 134/2025, de 29 de diciembre) existen.
+>
+> **Escala aplicada (2026):** 0-18.080 (23 %), 18.080-36.160 (28 %),
+> 36.160-54.240 (35 %), 54.240-77.450 (40 %), 77.450-107.260 (45 %),
+> 107.260-142.960 (46 %), 142.960-208.390 (47 %), 208.390+ (49 %).
+>
+> No se han tocado las deducciones forales simplificadas
+> (`deduccionForalTrabajo`, `deduccionForalDescendientesAcumulada`), que
+> siguen siendo una aproximación compartida con Navarra.
+
 > **Cambios v1.4 (2026-09-14) — escala foral real de Navarra:**
 > Navarra usaba como placeholder la misma escala foral que País Vasco
 > (aproximación provisional, ver v1.3). Se ha sustituido por su tarifa
@@ -322,7 +365,7 @@ al céntimo. Aragón, además, contrastado independientemente en
 | Murcia | Común | 9,50 % | 22,50 % | ✅ Verificada AEAT: coincide exactamente con los datos previos. |
 | La Rioja | Común | 8,00 % | 27,00 % | ✅ Verificada AEAT. Antes usaba el placeholder estatal. |
 | Navarra | **Foral** | 13,00 % | 52,00 % | ✅ Verificada (2026-09-14) vía Iberley (mirror del Decreto Foral Legislativo 4/2008, mod. Ley Foral 22/2023), validación matemática de cuotas acumuladas + confirmación independiente de umbrales clave. Tabla del ejercicio 2024, confirmada vigente sin cambios en 2025-2026 (LF 20/2024 y LF 17/2025 no tocaron la tarifa). 11 tramos reales, ya no usa la escala de País Vasco como aproximación. |
-| País Vasco | **Foral** | 23,00 % | 49,00 % | Sin tocar (no forma parte de esta revisión). Escala única (no se suma la estatal). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real (Álava/Bizkaia/Gipuzkoa) usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente. |
+| País Vasco | **Foral** | 23,00 % | 49,00 % | ✅ Verificada (2026-09-14): tipos confirmados por las 3 Diputaciones Forales (idénticos), umbrales 2026 con deflactación del 2 % confirmados por 2 puntos ancla independientes + validación matemática de cuota acumulada. Umbrales 4º-7º corregidos (los anteriores no correspondían a ninguna tabla real). Cálculo muy simplificado: escala foral íntegra − deducción general del trabajo (≈ 4.400 €) − deducciones por descendientes. El sistema real usa bonificación del trabajo y deducciones personales/familiares que aquí se aproximan groseramente (sin cambios en esta revisión). |
 
 **Comunidades aún no incluidas:** Ceuta y Melilla (con bonificación del 60 %,
 no son CCAA en sentido estricto).
